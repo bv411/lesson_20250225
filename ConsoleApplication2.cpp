@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <bitset>
 
 struct person {
 	std::string name;
@@ -59,7 +60,7 @@ int factorial(int a) {
 
 }
 
-int main()
+int main_23()
 {
 	int a = 5, b = 10;
 	a = a ^ b;  // a = 5 ^ 10
@@ -154,4 +155,129 @@ int main()
 	//	//std::cout << arr[i].name << " " << arr[i].age << " " << arr[i].phone << std::endl;
 	//}
 	
+}
+
+
+int main()
+{
+	//unsigned int number{ 0b0000'1100 };
+	//std::cout << number << std::endl;
+	//
+	////
+	//unsigned int a = 2 << 2; // 2 = 10 (в двоичной); 1000 = 8 (в десятичной)
+	//unsigned int b = 16 >> 3; // 16 = 10000 (в двоичной); 10 = 2 (в десятичной) 
+
+	//std::cout << a << std::endl;
+	//std::cout << b << std::endl;
+
+	//int e = 5 | 2; // | - поразрядная дизъюнкция (ИЛИ)
+	//// 5 = 101
+	//// 2 = 010
+	//// 7 = 111
+	//// Если хотя бы один из соответсвующих разрядов = 1, то разряд итогового
+	//// числа = 1
+
+	//int f = 6 & 2; // & - поразрядная конъюнкция (И)
+	//// 6 = 110
+	//// 2 = 010
+	//// 2 = 010
+	//// Если оба разряда равны = 1, то разряд итогового числа = 1
+
+	//int c = 6 ^ 2; // ^ - поразрядное исключающее ИЛИ
+	//// 6 = 110
+	//// 2 = 010
+	//// 4 = 100
+	//// Итоговое число получает в разряд единицу только в том случае,
+	//// если единице равен разряд ТОЛЬКО одного из чисел
+
+	//int d = ~9; // ~ - поразрядное отрицание (инверсия)
+	//// 9 = 0'1001
+	//// -10 = 1'1010
+
+	//std::cout << e << " " << f << " " << c << " " << d << std::endl;
+
+	//int value1{ 3 };
+	//int value2{ 2 };
+	//int value3{ 1 };
+	//int result{ 0b0000'0000 };
+
+	//result = result | value1;
+	//// 0b0000'0011
+	//result = result << 2;
+	//// 0b0000'1100
+	//result = result | value2;
+	//// 0b0000'1110
+	//result = result << 2;
+	//// 0b0011'1000
+	//result = result | value3;
+	//// 0b0011'1001
+	//std::cout << result << std::endl;
+
+	//int result_new{ 0b0011'1001 };
+	//int newValue3 = result_new & 0b0000'0011;
+	//// 0b0000'0001 = 1
+	//result_new = result_new >> 2;
+	//// 0b0000'1110
+	//int newValue2 = result_new & 0b0000'0011;
+	//// 0b0000'0010 = 2
+	//result_new = result_new >> 2;
+	//int newValue1 = result_new & 0b0000'0011;
+	//std::cout << newValue3 << " " << newValue2 << " " << newValue1;
+	//std::cout << std::endl;
+
+	/*
+		Одна из форм определения цвета представляет запись в формате RGB,
+		где R,G и B - соответственно компоненты красного, зеленого и синего
+		цвета. Каждая компонента может иметь значение 0 до 255.
+		Напишите программу, которая считывает с консоли значения для трёх
+		компонент цвета и сохраняет их в числовую переменную color.
+	*/
+
+	
+	//std::cout << std::bitset<32>(-10)  << std::endl;
+
+	//return 0;
+
+
+	unsigned int color{}; // переменная для хранения итогового цвета RGB
+	unsigned int c{}; // переменная для хранения ввода из консоли
+
+	std::cout << "Red (0 - 255): ";
+	std::cin >> c;
+	color |= c; // <=> color = color | c;
+	std::cout << "Color 1 = " << std::bitset<32>(color) << std::endl;
+
+	std::cout << "Green: ";
+	std::cin >> c;
+	color <<= 8; // <=> color = color << 8;
+	std::cout << "Color 2 = " << std::bitset<32>(color) << std::endl;
+	color |= c;
+	std::cout << "Color 3 = " << std::bitset<32>(color) << std::endl;
+
+	std::cout << "Blue: ";
+	std::cin >> c;
+	color <<= 8;
+	std::cout << "Color 4 = " << std::bitset<32>(color) << std::endl;
+	color |= c;
+
+
+	std::cout << std::bitset<32>(color) << std::endl << std::endl << std::endl;
+
+	int blue = color & 0b1111'1111; //  0b1111'1111 = 255 =  0xFF
+	color >>= 8;
+	int green = color & 0b1111'1111;
+	color >>= 8;
+	int red = color & 0b1111'1111;
+
+	std::cout << "Red = " << red << " Green = " << green << " Blue = " << blue << std::endl;
+
+	/*
+		1. Напишите программу, которая считывает с консоли три символа и упаковывает в одно число.
+		2. Вывести полученное число в консоль.
+		3. Распакуйте полученное число и выведете символы на экран.
+
+		Подсказка:
+			п.1. Символы == байты
+			п.2. Максимальное значение символа = 255, или в виде {0xFF}
+	*/
 }
